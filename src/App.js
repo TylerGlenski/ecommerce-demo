@@ -6,7 +6,7 @@ import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import LoginRegisterPage from './pages/login-register/login-register.component'
 import Header from './components/header/header.component';
-import { auth } from './firebase/firebase.utils'; 
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'; 
 
 
 
@@ -22,11 +22,25 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount(){
-    this.unsubscribeFromAuth = auth.onAuthStateChanged( user => {
-      this.setState({ currentUser: user })
+    this.unsubscribeFromAuth = auth.onAuthStateChanged( async userAuth => {
+      if(userAuth){
+        const userRef = await createUserProfileDocument(userAuth);
 
-      //console.log(user)
-    })
+        userRef.onSnapshot(snapshot => {
+          this.setState({
+            currentUser: {
+              id:snapshot.id,
+              ...snapshot.data()
+            }
+          });
+
+          // log user to console on state change. use for debugging sign-in / sign-up
+          console.log(this.state)
+        });
+      }
+
+      this.setState({ currentUser: userAuth });
+    });
   }
 
   componentWillUnmount(){
