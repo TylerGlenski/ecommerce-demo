@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TO RUN ON LOCAL HOST MUST CREATE YOUR OWN FIREBASE.CONFIG FILE from firebase console
+## Then make sure you have node installed on machine
+then navigate to project folder .../ecommerce-demo
+run command npm start
+
+
 
 ## Available Scripts
 
