@@ -1,3 +1,5 @@
+
+
 .header {
     height: 70px;
     width: 100%;
@@ -26,6 +28,10 @@
       .nav-item {
         padding: 10px 15px;
         cursor: pointer;
+
+        &:hover{
+          font-size: 1.25em;
+        }
       }
     }
   }
